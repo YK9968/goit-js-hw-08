@@ -74,7 +74,7 @@ const markup = images
     return `<li class="gallery-item">
     <a class="gallery-link" href="${original}" style="text-decoration: none">
       <img
-      style="width: 320px; height: 200px"
+        style="width: 320px; height: 200px"
         class="gallery-image"
         src="${preview}"
         data-source="${original}"
