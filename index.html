@@ -14,7 +14,16 @@ https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css
   </head>
   <body>
     <!-------------------------------------------------------- markup ---->
-    <ul class="gallery"></ul>
+    <ul
+      class="gallery"
+      style="
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        row-gap: 24px;
+        list-style: none;
+      "
+    ></ul>
     <!-------------------------------------------------------- script ---->
     <script src="./gallery.js"></script>
     <script src="
