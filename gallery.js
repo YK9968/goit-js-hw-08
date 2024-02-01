@@ -1,3 +1,5 @@
+"use strict";
+
 const images = [
   {
     preview:
@@ -72,9 +74,8 @@ const galleryElCollection = document.querySelector(".gallery");
 const markup = images
   .map(({ preview, original, description }) => {
     return `<li class="gallery-item">
-    <a class="gallery-link" href="${original}" style="text-decoration: none">
+    <a class="gallery-link" href="${original}">
       <img
-        style="width: 320px; height: 200px"
         class="gallery-image"
         src="${preview}"
         data-source="${original}"
