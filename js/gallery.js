@@ -88,19 +88,12 @@ const markup = images
 
 galleryElCollection.innerHTML = markup;
 
-// ================================================================== stop download =====>
-
-galleryElCollection.addEventListener("click", onStopDownloadImg);
-
-function onStopDownloadImg(event) {
-  event.preventDefault();
-}
-
 // ========================================================= use library show/close =====>
 
 galleryElCollection.addEventListener("click", onClickOpenImg);
 
 function onClickOpenImg(event) {
+  event.preventDefault();
   if (event.target.nodeName !== "IMG") {
     return;
   }
@@ -108,14 +101,21 @@ function onClickOpenImg(event) {
       <img src="${event.target.dataset.source}" width="800" height="600">
   `);
 
-  instance.show();
+  instance.show(() => {
+    document.addEventListener("keydown", onCloseImg);
+    document.addEventListener("click", delListener);
+  });
 
-  galleryElCollection.addEventListener("keydown", onCloseImg);
+  function delListener(event) {
+    document.removeEventListener("keydown", onCloseImg);
+  }
 
   function onCloseImg(event) {
-    if (event.code === "Escape") {
-      instance.close();
+    console.log(event);
+    if (event.code === "Escape" || event.type === "mouse") {
+      instance.close(() => {
+        document.removeEventListener("keydown", onCloseImg);
+      });
     }
-    console.log(event.code);
   }
 }
