@@ -97,25 +97,26 @@ function onClickOpenImg(event) {
   if (event.target.nodeName !== "IMG") {
     return;
   }
-  instance = basicLightbox.create(`
+  instance = basicLightbox.create(
+    `
       <img src="${event.target.dataset.source}" width="800" height="600">
-  `);
+  `,
+    {
+      onShow: () => {
+        document.addEventListener("keydown", onCloseImg);
+      },
+      onClose: () => {
+        document.removeEventListener("keydown", onCloseImg);
+      },
+    }
+  );
 
-  instance.show(() => {
-    document.addEventListener("keydown", onCloseImg);
-    document.addEventListener("click", delListener);
-  });
-
-  function delListener(event) {
-    document.removeEventListener("keydown", onCloseImg);
-  }
+  instance.show();
 
   function onCloseImg(event) {
     console.log(event);
-    if (event.code === "Escape" || event.type === "mouse") {
-      instance.close(() => {
-        document.removeEventListener("keydown", onCloseImg);
-      });
+    if (event.code === "Escape") {
+      instance.close();
     }
   }
 }
